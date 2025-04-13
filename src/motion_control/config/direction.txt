@@ -1,0 +1,66 @@
+--- 0
+back back
+back right
+back right
+back right
+back front
+back front
+back left
+back left
+back left
+
+--- 1
+right right
+right right
+right right
+right front
+right front
+right right
+right right
+right right
+
+--- 2
+right right
+right right
+right front
+right front
+right right
+right right
+
+--- 3
+right right
+right right
+right right
+right front
+
+--- 4
+front front
+right right
+
+--- 5
+left left
+front front
+
+--- 6
+left front
+left left
+left left
+left left
+
+--- 7
+left left
+left front
+left left
+left left
+left left
+left left
+
+--- 8
+left left
+left left
+left front
+left left
+left front
+left left
+left left
+left left

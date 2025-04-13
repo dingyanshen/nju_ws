@@ -1,0 +1,56 @@
+--- 0
+forward -0.58 normal
+forward -1.34 normal
+arc 0.7 120 LEFT -0.3
+forward -0.5 normal
+forward -0.5 normal
+arc 0.5 100 RIGHT -0.3
+forward -1.34 normal
+forward -0.6 normal
+
+--- 1
+forward -0.56 normal
+forward -1.31 normal
+arc 0.7 120 LEFT -0.3
+forward -0.5 normal
+forward -0.5 normal
+
+--- 2
+forward -1.31 normal
+arc 0.7 120 LEFT -0.3
+forward -0.5 normal
+forward -0.5 normal
+
+--- 3
+arc 0.7 120 LEFT -0.3
+forward -0.6 normal
+
+--- 4
+arc 0.5 100 LEFT -0.3
+forward -0.6 normal
+
+--- 5
+arc 0.5 100 RIGHT -0.3
+forward -0.5 normal
+
+--- 6
+arc 0.5 100 RIGHT -0.3
+arc 0.5 100 RIGHT -0.3
+arc 0.5 100 LEFT 0.3
+arc 0.5 100 RIGHT -0.3
+
+--- 7
+forward 1.31 normal
+arc 0.5 100 RIGHT -0.3
+arc 0.5 100 RIGHT -0.3
+arc 0.5 100 LEFT 0.3
+arc 0.5 100 RIGHT -0.3
+forward -1.28 normal
+
+--- 8
+arc 0.5 100 RIGHT -0.3
+arc 0.5 100 RIGHT -0.3
+arc 0.5 100 RIGHT -0.3
+arc 0.5 100 RIGHT -0.3
+forward -1.31 normal
+forward -0.50 normal rotate 60 normal

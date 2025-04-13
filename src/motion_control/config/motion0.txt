@@ -1,0 +1,57 @@
+--- 0 y
+navigate
+navigate
+navigate
+navigate
+navigate
+navigate
+navigate
+navigate
+
+--- 1 y
+forward 0.74 normal
+forward 1.48 normal
+navigate
+navigate
+navigate
+navigate
+navigate
+
+--- 2 y
+forward 0.74 normal
+navigate
+navigate
+navigate
+navigate
+
+--- 3 y
+arc 0.8 20 LEFT -0.3 arc 0.8 20 RIGHT -0.3 navigate
+arc 0.8 20 LEFT -0.3 arc 0.8 20 RIGHT -0.3 navigate
+arc 0.8 20 LEFT -0.3 arc 0.8 20 RIGHT -0.3 navigate
+
+--- 4 y
+forward 0.78 normal
+
+--- 5 y
+forward 0.78 normal
+
+--- 6 y
+arc 0.8 20 RIGHT -0.3 arc 0.8 20 LEFT -0.3 navigate
+arc 0.8 20 RIGHT -0.3 arc 0.8 20 LEFT -0.3 navigate
+arc 0.8 20 RIGHT -0.3 arc 0.8 20 LEFT -0.3 navigate
+
+--- 7 y
+navigate
+navigate
+navigate
+navigate
+forward 0.74 normal
+
+--- 8 y
+navigate
+navigate
+navigate
+navigate
+navigate
+forward 0.74 normal
+forward 1.48 normal
