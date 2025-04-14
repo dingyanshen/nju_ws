@@ -150,54 +150,54 @@ class MainController:
         """
         邮箱文字识别[右上]
         """
-        self.navigate_posekey("RU2")#到达目标点位
-        print("RU2 is arrived.")
-        #self.process_box("RU2")#拍照
+        self.navigate_posekey("ARU2")#到达目标点位
+        print("ARU2 is arrived.")
+        self.process_box("ARU2")#拍照
 
-        self.navigate_posekey("RU1")#到达目标点位
-        print("RU1 is arrived.")
-        #self.process_box("RU1")#拍照
+        self.navigate_posekey("ARU1")#到达目标点位
+        print("ARU1 is arrived.")
+        self.process_box("ARU1")#拍照
 
     def takeboxPic_RD(self):
         """
         邮箱文字识别[右下]
         """
-        self.navigate_posekey("RD2")#到达目标点位
-        print("RD2 is arrived.")
-        #self.process_box("RD2")#拍照
+        self.navigate_posekey("ARD2")#到达目标点位
+        print("ARD2 is arrived.")
+        self.process_box("ARD2")#拍照
         rospy.sleep(0.5)
 
-        self.navigate_posekey("RD1")#到达目标点位
-        print("RD1 is arrived.")
-        #self.process_box("RU1")#拍照
+        self.navigate_posekey("ARD1")#到达目标点位
+        print("ARD1 is arrived.")
+        self.process_box("ARD1")#拍照
         rospy.sleep(0.5)
         
     def takeboxPic_LU(self):
         """
         邮箱文字识别[左上]
         """
-        self.navigate_posekey("LU1")#到达目标点位
-        print("LU1 is arrived.")
-        #self.process_box("RU1")#拍照
+        self.navigate_posekey("ALU1")#到达目标点位
+        print("ALU1 is arrived.")
+        self.process_box("ALU1")#拍照
         rospy.sleep(0.5)
 
-        self.navigate_posekey("LU2")#到达目标点位
-        print("LU2 is arrived.")
-        #self.process_box("RU1")#拍照
+        self.navigate_posekey("ALU2")#到达目标点位
+        print("ALU2 is arrived.")
+        self.process_box("ALU2")#拍照
         rospy.sleep(0.5)
 
     def takeboxPic_LD(self):
         """
         邮箱文字识别[左下]
         """
-        self.navigate_posekey("LD1")#到达目标点位
-        print("LD1 is arrived.")
-        #self.process_box("RU1")#拍照
+        self.navigate_posekey("ALD1")#到达目标点位
+        print("ALD1 is arrived.")
+        self.process_box("ALD1")#拍照
         rospy.sleep(0.5)
 
-        self.navigate_posekey("LD2")#到达目标点位
-        print("LD2 is arrived.")
-        #self.process_box("RU1")#拍照
+        self.navigate_posekey("ALD2")#到达目标点位
+        print("ALD2 is arrived.")
+        self.process_box("ALD2")#拍照
         rospy.sleep(0.5)
                 
     def takeshelfPic_R(self):
@@ -206,17 +206,17 @@ class MainController:
         """
         self.navigate_posekey("RP1")#到达目标点位
         print("RP1 is arrived.")
-        #self.process_shelf()#拍照
+        self.process_shelf()#拍照
         rospy.sleep(0.5)
         
         self.navigate_posekey("RP2")#到达目标点位
-        print("RP1 is arrived.")
-        #self.process_shelf()#拍照
+        print("RP2 is arrived.")
+        self.process_shelf()#拍照
         rospy.sleep(0.5)
         
         self.navigate_posekey("RP3")#到达目标点位
-        print("RP1 is arrived.")
-        #self.process_shelf()#拍照
+        print("RP3 is arrived.")
+        self.process_shelf()#拍照
         rospy.sleep(0.5)
 
     def takeshelfPic_L(self):
@@ -225,17 +225,17 @@ class MainController:
         """
         self.navigate_posekey("LP3")#到达目标点位
         print("LP3 is arrived.")
-        #self.process_box("RU1")#拍照
+        self.process_box("RU3")#拍照
         rospy.sleep(0.5)
         
         self.navigate_posekey("LP2")#到达目标点位
         print("LP2 is arrived.")
-        #self.process_box("RU1")#拍照
+        self.process_box("RU2")#拍照
         rospy.sleep(0.5)
         
         self.navigate_posekey("LP1")#到达目标点位
         print("LP1 is arrived.")
-        #self.process_box("RU1")#拍照
+        self.process_box("RU1")#拍照
         rospy.sleep(0.5)
 
     def process_shelf(self):
@@ -409,17 +409,14 @@ class MainController:
         ## 主程序
         self.welcome() # 欢迎界面
         self.calibratePose("start") # 校准位姿
-        self.BM.moveArc(0.5, 90, "LEFT", 0.5) # 左转90度 半径0.5米
-        print("左转90度 半径0.5米")
-        self.BM.moveForward(0.3, mode="normal") # 前进0.3米
-        print("前进0.3米")
         self.takeboxPic_LD() # 邮箱拍照[左下]
         print("邮箱拍照[左下]")
-        self.BM.moveForward(0.2, mode="normal") # 前进0.2米
-        print("前进0.2米")
         self.takeboxPic_LU() # 邮箱拍照[左上]
         print("邮箱拍照[左上]")
-        self.takeshelfPic_L() # 货架拍照[左侧]
+        self.takeboxPic_RU() # 邮箱拍照[右上]
+        print("邮箱拍照[右上]")
+        self.takeboxPic_RD() # 邮箱拍照[右下]
+        print("邮箱拍照[右下]")
         self.navigate_posekey("start") # 返回起始位置
         print("返回起始位置")
 
@@ -503,32 +500,6 @@ class MainController:
     #     self.navigate_posekey("start") # 返回起始位置
     #     print("返回起始位置")
 
-    # def run(self):
-    #     ## 主程序
-    #     self.welcome() # 欢迎界面
-    #     self.calibratePose("start") # 校准位姿
-        
-    #     self.BM.moveArc(0.5, 90, "LEFT", 0.3)
-    #     self.navigate_posekey("ALD1")
-    #     self.process_box("LD1")
-    #     self.navigate_posekey("ALD2")
-    #     self.process_box("LD2")
-    #     self.navigate_posekey("ALU1")
-    #     self.process_box("LU1")
-    #     self.navigate_posekey("ALU2")
-    #     self.process_box("LU2")
-    #     self.navigate_posekey("ARU2")
-    #     self.process_box("RU2")
-    #     self.navigate_posekey("ARU1")
-    #     self.process_box("RU1")
-    #     self.navigate_posekey("ARD2")
-    #     self.process_box("RD2")
-    #     self.navigate_posekey("ARD1")
-    #     self.process_box("RD1")
-    #     print(self.mail_box)
-    #     self.navigate_posekey("start") # 返回起始位置
-    #     print("返回起始位置")
-
 
     # def run(self):
     #     ## 主程序
@@ -603,19 +574,6 @@ class MainController:
         
     #     self.navigate_posekey("start") # 返回起始位置
     #     print("返回起始位置")
-
-    
-    # def run(self):
-    #     ## 主程序
-    #     self.welcome() # 欢迎界面
-    #     self.calibratePose("start") # 校准位姿
-    #     self.navigate_posekey("RP1")
-    #     self.process_box("3")
-    #     self.navigate_posekey("RP2")
-    #     self.process_box("2")
-    #     self.navigate_posekey("RP3")
-    #     self.process_box("1")
-
         
 if __name__ == "__main__":
     position_path = "/home/eaibot/nju_ws/src/motion_control/config/position.txt"

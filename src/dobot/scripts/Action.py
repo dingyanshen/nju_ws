@@ -157,17 +157,6 @@ class Dobot():
             rospy.logwarn('Out of safe distance!')
             x = x * 320 / R
             y = y * 320 / R
-        elif R <= 130:
-            print('[WARN] Out of safe distance!')
-            rospy.logwarn('Out of safe distance!')
-            x = x * 130 / R
-            y = y * 130 / R
-        elif 130 < R < 216 and y/x > 3:
-            print('[WARN] Out of safe distance!')
-            rospy.logwarn('Out of safe distance!')
-            x = x * 216 / R
-            y = y * 216 / R
-
         return x, y
 
     def setIOMultiplexing(self, address, multiplex): #设置IO复用
@@ -231,7 +220,7 @@ class Dobot():
         calculate_PWM = (calculate_PWM1 + calculate_PWM2) / 2
         self.setTheta(0)
         rospy.sleep(0.1)
-        self.setPose(0+error_x,300+error_y,height1+15,0)
+        self.setPose(0+error_x,300+error_y,height1+20,0)
         rospy.sleep(0.1)
         self.setTheta(calculate_PWM)
         rospy.sleep(0.6)
@@ -240,7 +229,7 @@ class Dobot():
         rospy.sleep(0.3)
         self.setPose(0+error_x,300+error_y,height1+15,0)
         rospy.sleep(0.1)
-        self.setPose(0+error_x,160+error_y,height1+15,0)
+        self.setPose(0+error_x,175+error_y,height1+15,0)
         rospy.sleep(0.1)
         self.setPose(250,0,height1+15,0)
         self.setPose(250,0,height2,0)
@@ -274,10 +263,10 @@ if __name__ == '__main__':
     dobot.setIOMultiplexing(8, 2)
     dobot.setTheta(1)
 
-    dobot.CatchBox(0, 0, 100, 0) #1上1上
-    dobot.CatchBox(1, 1, 100, 0) #1上1上
-    dobot.ThrowBox(1, 1) #上方邮件投掷到右侧邮箱 1上1右
-    dobot.ThrowBox(0, 1) #上方邮件投掷到右侧邮箱 1上1右
+    # dobot.CatchBox(0, 0, 0, 0) #1上1上
+    # dobot.CatchBox(1, 1, 0, 0) #1上1上
+    # dobot.ThrowBox(1, 1) #上方邮件投掷到右侧邮箱 1上1右
+    # dobot.ThrowBox(0, 1) #上方邮件投掷到右侧邮箱 1上1右
 
     # while True:
     #     pose = dobot.getPose()
