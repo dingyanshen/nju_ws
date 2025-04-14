@@ -40,7 +40,7 @@ template<>
 struct MD5Sum< ::camera::PhotoshelfService > {
   static const char* value()
   {
-    return "5fbec0c698813ceefcd320f6e0b0177c";
+    return "b956cbec76bf70325b60df673b2d7722";
   }
 
   static const char* value(const ::camera::PhotoshelfService&) { return value(); }

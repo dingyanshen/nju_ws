@@ -24,32 +24,27 @@ struct PhotoshelfServiceResponse_
   typedef PhotoshelfServiceResponse_<ContainerAllocator> Type;
 
   PhotoshelfServiceResponse_()
-    : province_names()
-    , positions_x()
-    , positions_y()
-    , codes()  {
+    : results()
+    , positions_z()
+    , positions_x()  {
     }
   PhotoshelfServiceResponse_(const ContainerAllocator& _alloc)
-    : province_names(_alloc)
-    , positions_x(_alloc)
-    , positions_y(_alloc)
-    , codes(_alloc)  {
+    : results(_alloc)
+    , positions_z(_alloc)
+    , positions_x(_alloc)  {
   (void)_alloc;
     }
 
 
 
-   typedef std::vector<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > , typename ContainerAllocator::template rebind<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::other >  _province_names_type;
-  _province_names_type province_names;
+   typedef std::vector<int32_t, typename ContainerAllocator::template rebind<int32_t>::other >  _results_type;
+  _results_type results;
+
+   typedef std::vector<int32_t, typename ContainerAllocator::template rebind<int32_t>::other >  _positions_z_type;
+  _positions_z_type positions_z;
 
    typedef std::vector<int32_t, typename ContainerAllocator::template rebind<int32_t>::other >  _positions_x_type;
   _positions_x_type positions_x;
-
-   typedef std::vector<int32_t, typename ContainerAllocator::template rebind<int32_t>::other >  _positions_y_type;
-  _positions_y_type positions_y;
-
-   typedef std::vector<int32_t, typename ContainerAllocator::template rebind<int32_t>::other >  _codes_type;
-  _codes_type codes;
 
 
 
@@ -129,12 +124,12 @@ struct MD5Sum< ::camera::PhotoshelfServiceResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "5fbec0c698813ceefcd320f6e0b0177c";
+    return "880c8ac3d7edb422a74a333fb36ec2cc";
   }
 
   static const char* value(const ::camera::PhotoshelfServiceResponse_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x5fbec0c698813ceeULL;
-  static const uint64_t static_value2 = 0xfcd320f6e0b0177cULL;
+  static const uint64_t static_value1 = 0x880c8ac3d7edb422ULL;
+  static const uint64_t static_value2 = 0xa74a333fb36ec2ccULL;
 };
 
 template<class ContainerAllocator>
@@ -153,10 +148,9 @@ struct Definition< ::camera::PhotoshelfServiceResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "string[] province_names\n\
+    return "int32[] results\n\
+int32[] positions_z\n\
 int32[] positions_x\n\
-int32[] positions_y\n\
-int32[] codes\n\
 ";
   }
 
@@ -175,10 +169,9 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.province_names);
+      stream.next(m.results);
+      stream.next(m.positions_z);
       stream.next(m.positions_x);
-      stream.next(m.positions_y);
-      stream.next(m.codes);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -197,29 +190,23 @@ struct Printer< ::camera::PhotoshelfServiceResponse_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::camera::PhotoshelfServiceResponse_<ContainerAllocator>& v)
   {
-    s << indent << "province_names[]" << std::endl;
-    for (size_t i = 0; i < v.province_names.size(); ++i)
+    s << indent << "results[]" << std::endl;
+    for (size_t i = 0; i < v.results.size(); ++i)
     {
-      s << indent << "  province_names[" << i << "]: ";
-      Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.province_names[i]);
+      s << indent << "  results[" << i << "]: ";
+      Printer<int32_t>::stream(s, indent + "  ", v.results[i]);
+    }
+    s << indent << "positions_z[]" << std::endl;
+    for (size_t i = 0; i < v.positions_z.size(); ++i)
+    {
+      s << indent << "  positions_z[" << i << "]: ";
+      Printer<int32_t>::stream(s, indent + "  ", v.positions_z[i]);
     }
     s << indent << "positions_x[]" << std::endl;
     for (size_t i = 0; i < v.positions_x.size(); ++i)
     {
       s << indent << "  positions_x[" << i << "]: ";
       Printer<int32_t>::stream(s, indent + "  ", v.positions_x[i]);
-    }
-    s << indent << "positions_y[]" << std::endl;
-    for (size_t i = 0; i < v.positions_y.size(); ++i)
-    {
-      s << indent << "  positions_y[" << i << "]: ";
-      Printer<int32_t>::stream(s, indent + "  ", v.positions_y[i]);
-    }
-    s << indent << "codes[]" << std::endl;
-    for (size_t i = 0; i < v.codes.size(); ++i)
-    {
-      s << indent << "  codes[" << i << "]: ";
-      Printer<int32_t>::stream(s, indent + "  ", v.codes[i]);
     }
   }
 };

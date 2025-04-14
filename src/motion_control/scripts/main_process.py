@@ -206,17 +206,17 @@ class MainController:
         """
         self.navigate_posekey("RP1")#到达目标点位
         print("RP1 is arrived.")
-        self.process_shelf()#拍照
+        self.process_shelf(4)#拍照
         rospy.sleep(0.5)
         
         self.navigate_posekey("RP2")#到达目标点位
         print("RP2 is arrived.")
-        self.process_shelf()#拍照
+        self.process_shelf(5)#拍照
         rospy.sleep(0.5)
         
         self.navigate_posekey("RP3")#到达目标点位
         print("RP3 is arrived.")
-        self.process_shelf()#拍照
+        self.process_shelf(6)#拍照
         rospy.sleep(0.5)
 
     def takeshelfPic_L(self):
@@ -225,32 +225,29 @@ class MainController:
         """
         self.navigate_posekey("LP3")#到达目标点位
         print("LP3 is arrived.")
-        self.process_box("RU3")#拍照
+        self.process_shelf(1)#拍照
         rospy.sleep(0.5)
         
         self.navigate_posekey("LP2")#到达目标点位
         print("LP2 is arrived.")
-        self.process_box("RU2")#拍照
+        self.process_shelf(2)#拍照
         rospy.sleep(0.5)
         
         self.navigate_posekey("LP1")#到达目标点位
         print("LP1 is arrived.")
-        self.process_box("RU1")#拍照
+        self.process_shelf(3)#拍照
         rospy.sleep(0.5)
 
-    def process_shelf(self):
+    def process_shelf(self, type):
         # 调用拍照服务 货架
         try:
-            response = self.photo_shelf_proxy()
-            # 更新邮件表
-            for i in range(len(response.provinces)):
-                self.mail_table.append({
-                    'province': response.provinces[i],
-                    'x': response.positions_x[i],
-                    'y': response.positions_y[i],
-                    'code': response.codes[i]
-                })
-            rospy.loginfo("Updated mail table with {len(response.provinces)} entries.")
+            response = self.photo_shelf_proxy(type)
+            print(response)
+            # self.mail_table.append({
+            #     'province': response[0],
+            #     'position_z': response[1],
+            #     'position_x': response[2],
+            #     })
         except rospy.ServiceException as e:
             rospy.logerr("Photo service call failed: {e}")
 
@@ -258,15 +255,12 @@ class MainController:
         # 调用拍照服务 邮箱
         try:
             response = self.photo_box_proxy()
-            # 更新邮件表
             print(response)
-            self.mail_box.append({
-                    'box_id': box_id,
-                    'province': response
-                })
-            self.priority_provinces.append(response)
-            # 更新邮件表
-            rospy.loginfo("Updated mail table with {len(response.provinces)} entries.")
+            # self.mail_box.append({
+            #         'box_id': box_id,
+            #         'province': response
+            #     })
+            # self.priority_provinces.append(response)
         except rospy.ServiceException as e:
             rospy.logerr("Photo service call failed: {e}")
     
@@ -405,20 +399,20 @@ class MainController:
                     ]
             grabbed_mails = []  # 清空已抓取邮件列表
 
-    def run(self):
-        ## 主程序
-        self.welcome() # 欢迎界面
-        self.calibratePose("start") # 校准位姿
-        self.takeboxPic_LD() # 邮箱拍照[左下]
-        print("邮箱拍照[左下]")
-        self.takeboxPic_LU() # 邮箱拍照[左上]
-        print("邮箱拍照[左上]")
-        self.takeboxPic_RU() # 邮箱拍照[右上]
-        print("邮箱拍照[右上]")
-        self.takeboxPic_RD() # 邮箱拍照[右下]
-        print("邮箱拍照[右下]")
-        self.navigate_posekey("start") # 返回起始位置
-        print("返回起始位置")
+    # def run(self):
+    #     ## 主程序
+    #     self.welcome() # 欢迎界面
+    #     self.calibratePose("start") # 校准位姿
+    #     self.takeboxPic_LD() # 邮箱拍照[左下]
+    #     print("邮箱拍照[左下]")
+    #     self.takeboxPic_LU() # 邮箱拍照[左上]
+    #     print("邮箱拍照[左上]")
+    #     self.takeboxPic_RU() # 邮箱拍照[右上]
+    #     print("邮箱拍照[右上]")
+    #     self.takeboxPic_RD() # 邮箱拍照[右下]
+    #     print("邮箱拍照[右下]")
+    #     self.navigate_posekey("start") # 返回起始位置
+    #     print("返回起始位置")
 
     # def run(self):
     #     ## 主程序
@@ -574,6 +568,13 @@ class MainController:
         
     #     self.navigate_posekey("start") # 返回起始位置
     #     print("返回起始位置")
+
+    def run(self):
+        ## 主程序
+        self.welcome() # 欢迎界面
+        self.calibratePose("start")
+        self.takeshelfPic_L() # 货架拍照左侧
+        self.navigate_posekey("start") # 返回起始位置
         
 if __name__ == "__main__":
     position_path = "/home/eaibot/nju_ws/src/motion_control/config/position.txt"

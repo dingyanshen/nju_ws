@@ -24,14 +24,17 @@ struct PhotoshelfServiceRequest_
   typedef PhotoshelfServiceRequest_<ContainerAllocator> Type;
 
   PhotoshelfServiceRequest_()
-    {
+    : type(0)  {
     }
   PhotoshelfServiceRequest_(const ContainerAllocator& _alloc)
-    {
+    : type(0)  {
   (void)_alloc;
     }
 
 
+
+   typedef int32_t _type_type;
+  _type_type type;
 
 
 
@@ -111,12 +114,12 @@ struct MD5Sum< ::camera::PhotoshelfServiceRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "d41d8cd98f00b204e9800998ecf8427e";
+    return "bda37decd5e3814bcc042f341d2e60a1";
   }
 
   static const char* value(const ::camera::PhotoshelfServiceRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xd41d8cd98f00b204ULL;
-  static const uint64_t static_value2 = 0xe9800998ecf8427eULL;
+  static const uint64_t static_value1 = 0xbda37decd5e3814bULL;
+  static const uint64_t static_value2 = 0xcc042f341d2e60a1ULL;
 };
 
 template<class ContainerAllocator>
@@ -137,6 +140,9 @@ struct Definition< ::camera::PhotoshelfServiceRequest_<ContainerAllocator> >
   {
     return "\n\
 \n\
+int32 type\n\
+\n\
+\n\
 ";
   }
 
@@ -153,8 +159,10 @@ namespace serialization
 
   template<class ContainerAllocator> struct Serializer< ::camera::PhotoshelfServiceRequest_<ContainerAllocator> >
   {
-    template<typename Stream, typename T> inline static void allInOne(Stream&, T)
-    {}
+    template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
+    {
+      stream.next(m.type);
+    }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
   }; // struct PhotoshelfServiceRequest_
@@ -170,8 +178,11 @@ namespace message_operations
 template<class ContainerAllocator>
 struct Printer< ::camera::PhotoshelfServiceRequest_<ContainerAllocator> >
 {
-  template<typename Stream> static void stream(Stream&, const std::string&, const ::camera::PhotoshelfServiceRequest_<ContainerAllocator>&)
-  {}
+  template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::camera::PhotoshelfServiceRequest_<ContainerAllocator>& v)
+  {
+    s << indent << "type: ";
+    Printer<int32_t>::stream(s, indent + "  ", v.type);
+  }
 };
 
 } // namespace message_operations

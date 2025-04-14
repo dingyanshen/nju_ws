@@ -1,10 +1,10 @@
 (cl:in-package camera-srv)
-(cl:export '(PROVINCE_NAMES-VAL
-          PROVINCE_NAMES
+(cl:export '(TYPE-VAL
+          TYPE
+          RESULTS-VAL
+          RESULTS
+          POSITIONS_Z-VAL
+          POSITIONS_Z
           POSITIONS_X-VAL
           POSITIONS_X
-          POSITIONS_Y-VAL
-          POSITIONS_Y
-          CODES-VAL
-          CODES
 ))

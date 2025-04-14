@@ -21,13 +21,22 @@ class PhotoshelfServiceRequest {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
+      this.type = null;
     }
     else {
+      if (initObj.hasOwnProperty('type')) {
+        this.type = initObj.type
+      }
+      else {
+        this.type = 0;
+      }
     }
   }
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type PhotoshelfServiceRequest
+    // Serialize message field [type]
+    bufferOffset = _serializer.int32(obj.type, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -35,11 +44,13 @@ class PhotoshelfServiceRequest {
     //deserializes a message object of type PhotoshelfServiceRequest
     let len;
     let data = new PhotoshelfServiceRequest(null);
+    // Deserialize message field [type]
+    data.type = _deserializer.int32(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 0;
+    return 4;
   }
 
   static datatype() {
@@ -49,12 +60,15 @@ class PhotoshelfServiceRequest {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'd41d8cd98f00b204e9800998ecf8427e';
+    return 'bda37decd5e3814bcc042f341d2e60a1';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
+    
+    
+    int32 type
     
     
     
@@ -67,6 +81,13 @@ class PhotoshelfServiceRequest {
       msg = {};
     }
     const resolved = new PhotoshelfServiceRequest(null);
+    if (msg.type !== undefined) {
+      resolved.type = msg.type;
+    }
+    else {
+      resolved.type = 0
+    }
+
     return resolved;
     }
 };
@@ -75,17 +96,22 @@ class PhotoshelfServiceResponse {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
-      this.province_names = null;
+      this.results = null;
+      this.positions_z = null;
       this.positions_x = null;
-      this.positions_y = null;
-      this.codes = null;
     }
     else {
-      if (initObj.hasOwnProperty('province_names')) {
-        this.province_names = initObj.province_names
+      if (initObj.hasOwnProperty('results')) {
+        this.results = initObj.results
       }
       else {
-        this.province_names = [];
+        this.results = [];
+      }
+      if (initObj.hasOwnProperty('positions_z')) {
+        this.positions_z = initObj.positions_z
+      }
+      else {
+        this.positions_z = [];
       }
       if (initObj.hasOwnProperty('positions_x')) {
         this.positions_x = initObj.positions_x
@@ -93,31 +119,17 @@ class PhotoshelfServiceResponse {
       else {
         this.positions_x = [];
       }
-      if (initObj.hasOwnProperty('positions_y')) {
-        this.positions_y = initObj.positions_y
-      }
-      else {
-        this.positions_y = [];
-      }
-      if (initObj.hasOwnProperty('codes')) {
-        this.codes = initObj.codes
-      }
-      else {
-        this.codes = [];
-      }
     }
   }
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type PhotoshelfServiceResponse
-    // Serialize message field [province_names]
-    bufferOffset = _arraySerializer.string(obj.province_names, buffer, bufferOffset, null);
+    // Serialize message field [results]
+    bufferOffset = _arraySerializer.int32(obj.results, buffer, bufferOffset, null);
+    // Serialize message field [positions_z]
+    bufferOffset = _arraySerializer.int32(obj.positions_z, buffer, bufferOffset, null);
     // Serialize message field [positions_x]
     bufferOffset = _arraySerializer.int32(obj.positions_x, buffer, bufferOffset, null);
-    // Serialize message field [positions_y]
-    bufferOffset = _arraySerializer.int32(obj.positions_y, buffer, bufferOffset, null);
-    // Serialize message field [codes]
-    bufferOffset = _arraySerializer.int32(obj.codes, buffer, bufferOffset, null);
     return bufferOffset;
   }
 
@@ -125,26 +137,21 @@ class PhotoshelfServiceResponse {
     //deserializes a message object of type PhotoshelfServiceResponse
     let len;
     let data = new PhotoshelfServiceResponse(null);
-    // Deserialize message field [province_names]
-    data.province_names = _arrayDeserializer.string(buffer, bufferOffset, null)
+    // Deserialize message field [results]
+    data.results = _arrayDeserializer.int32(buffer, bufferOffset, null)
+    // Deserialize message field [positions_z]
+    data.positions_z = _arrayDeserializer.int32(buffer, bufferOffset, null)
     // Deserialize message field [positions_x]
     data.positions_x = _arrayDeserializer.int32(buffer, bufferOffset, null)
-    // Deserialize message field [positions_y]
-    data.positions_y = _arrayDeserializer.int32(buffer, bufferOffset, null)
-    // Deserialize message field [codes]
-    data.codes = _arrayDeserializer.int32(buffer, bufferOffset, null)
     return data;
   }
 
   static getMessageSize(object) {
     let length = 0;
-    object.province_names.forEach((val) => {
-      length += 4 + val.length;
-    });
+    length += 4 * object.results.length;
+    length += 4 * object.positions_z.length;
     length += 4 * object.positions_x.length;
-    length += 4 * object.positions_y.length;
-    length += 4 * object.codes.length;
-    return length + 16;
+    return length + 12;
   }
 
   static datatype() {
@@ -154,16 +161,15 @@ class PhotoshelfServiceResponse {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '5fbec0c698813ceefcd320f6e0b0177c';
+    return '880c8ac3d7edb422a74a333fb36ec2cc';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    string[] province_names
+    int32[] results
+    int32[] positions_z
     int32[] positions_x
-    int32[] positions_y
-    int32[] codes
     
     `;
   }
@@ -174,11 +180,18 @@ class PhotoshelfServiceResponse {
       msg = {};
     }
     const resolved = new PhotoshelfServiceResponse(null);
-    if (msg.province_names !== undefined) {
-      resolved.province_names = msg.province_names;
+    if (msg.results !== undefined) {
+      resolved.results = msg.results;
     }
     else {
-      resolved.province_names = []
+      resolved.results = []
+    }
+
+    if (msg.positions_z !== undefined) {
+      resolved.positions_z = msg.positions_z;
+    }
+    else {
+      resolved.positions_z = []
     }
 
     if (msg.positions_x !== undefined) {
@@ -188,20 +201,6 @@ class PhotoshelfServiceResponse {
       resolved.positions_x = []
     }
 
-    if (msg.positions_y !== undefined) {
-      resolved.positions_y = msg.positions_y;
-    }
-    else {
-      resolved.positions_y = []
-    }
-
-    if (msg.codes !== undefined) {
-      resolved.codes = msg.codes;
-    }
-    else {
-      resolved.codes = []
-    }
-
     return resolved;
     }
 };
@@ -209,6 +208,6 @@ class PhotoshelfServiceResponse {
 module.exports = {
   Request: PhotoshelfServiceRequest,
   Response: PhotoshelfServiceResponse,
-  md5sum() { return '5fbec0c698813ceefcd320f6e0b0177c'; },
+  md5sum() { return 'b956cbec76bf70325b60df673b2d7722'; },
   datatype() { return 'camera/PhotoshelfService'; }
 };
