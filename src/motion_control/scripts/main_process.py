@@ -399,61 +399,19 @@ class MainController:
                     ]
             grabbed_mails = []  # 清空已抓取邮件列表
 
-    # def run(self):
-    #     ## 主程序
-    #     self.welcome() # 欢迎界面
-    #     self.calibratePose("start") # 校准位姿
-    #     self.takeboxPic_LD() # 邮箱拍照[左下]
-    #     print("邮箱拍照[左下]")
-    #     self.takeboxPic_LU() # 邮箱拍照[左上]
-    #     print("邮箱拍照[左上]")
-    #     self.takeboxPic_RU() # 邮箱拍照[右上]
-    #     print("邮箱拍照[右上]")
-    #     self.takeboxPic_RD() # 邮箱拍照[右下]
-    #     print("邮箱拍照[右下]")
-    #     self.navigate_posekey("start") # 返回起始位置
-    #     print("返回起始位置")
-
-    # def run(self):
-    #     ## 主程序
-    #     self.welcome() # 欢迎界面
-    #     self.calibratePose("start") # 校准位姿
-    #     # print('等待程序初始化完成...')
-    #     # rospy.sleep(10) #预留给机械臂复位
-    #     # print('还剩20秒...')
-    #     # rospy.sleep(5)
-    #     # print('还剩15秒...')
-    #     # rospy.sleep(5)
-    #     # print('还剩10秒...')
-    #     # rospy.sleep(5)
-    #     # print('还剩5秒...')
-    #     # rospy.sleep(5)
-    #     # print('开始运行...')
     #     self.BM.moveArc(0.5, 80, "LEFT", 0.3) # 左转90度 半径0.5米
     #     print("左转90度 半径0.5米")
     #     self.BM.moveForward(0.3, mode="normal") # 前进0.3米
     #     print("前进0.3米")
 
     #     self.navigate_posekey("LD1") # 河南
-    #     print("河南")
+
     #     mail = [1, 0]
     #     response = self.throw_proxy(*mail)
     #     if response.success:
     #         print("投掷成功")
     #     else:
     #         print("投掷失败")
-
-    #     self.navigate_posekey("LD2") # 湖南
-    #     print("湖南")
-    #     mail = [0, 0]
-    #     response = self.throw_proxy(*mail)
-    #     if response.success:
-    #         print("投掷成功")
-    #     else:
-    #         print("投掷失败")
-        
-    #     self.BM.moveForward(0.25, mode="normal") # 前进0.25米
-    #     print("前进0.25米")
 
     #     self.navigate_posekey("LP3") # 货架
     #     print("货架")
@@ -463,118 +421,11 @@ class MainController:
     #         print("抓取成功")
     #     else:
     #         print("抓取失败")
-    #     mail = [0, 1, 100, 0]
-    #     response = self.grasp_proxy(*mail)
-    #     if response.success:
-    #         print("抓取成功")
-    #     else:
-    #         print("抓取失败")
-
-    #     self.BM.moveForward(1.0, mode="normal") # 前进1.0米
-    #     print("前进1.0米")
-
-    #     self.navigate_posekey("LU1") # 四川
-    #     print("四川")
-    #     mail = [1, 0]
-    #     response = self.throw_proxy(*mail)
-    #     if response.success:
-    #         print("投掷成功")
-    #     else:
-    #         print("投掷失败")
-
-    #     self.navigate_posekey("LU2") # 浙江
-    #     print("浙江")
-    #     mail = [0, 0]
-    #     response = self.throw_proxy(*mail)
-    #     if response.success:
-    #         print("投掷成功")
-    #     else:
-    #         print("投掷失败")
-        
-    #     self.navigate_posekey("start") # 返回起始位置
-    #     print("返回起始位置")
-
-
-    # def run(self):
-    #     ## 主程序
-    #     self.welcome() # 欢迎界面
-    #     self.calibratePose("start") # 校准位姿
-
-    #     self.navigate_posekey("CL1")
-    #     print("货架")
-    #     mail = [1, 0, 100, 0]
-    #     response = self.grasp_proxy(*mail)
-    #     if response.success:
-    #         print("抓取成功")
-    #     else:
-    #         print("抓取失败")
-    #     mail = [0, 1, 100, 0]
-    #     response = self.grasp_proxy(*mail)
-    #     if response.success:
-    #         print("抓取成功")
-    #     else:
-    #         print("抓取失败")
-
-    #     self.BM.moveForward(1.0, mode="normal") # 前进1.0米
-    #     print("前进1.0米")
-
-    #     self.navigate_posekey("LU1")
-    #     mail = [1, 0]
-    #     response = self.throw_proxy(*mail)
-    #     if response.success:
-    #         print("投掷成功")
-    #     else:
-    #         print("投掷失败")
-
-    #     self.navigate_posekey("LU2")
-    #     mail = [0, 0]
-    #     response = self.throw_proxy(*mail)
-    #     if response.success:
-    #         print("投掷成功")
-    #     else:
-    #         print("投掷失败")
-
-    #     self.navigate_posekey("CL5")
-    #     print("货架")
-    #     mail = [1, 0, 100, 0]
-    #     response = self.grasp_proxy(*mail)
-    #     if response.success:
-    #         print("抓取成功")
-    #     else:
-    #         print("抓取失败")
-    #     mail = [0, 1, 100, 0]
-    #     response = self.grasp_proxy(*mail)
-    #     if response.success:
-    #         print("抓取成功")
-    #     else:
-    #         print("抓取失败")
-
-       
-    #     self.navigate_posekey("LD2")
-    #     mail = [1, 0]
-    #     response = self.throw_proxy(*mail)
-    #     if response.success:
-    #         print("投掷成功")
-    #     else:
-    #         print("投掷失败")
-
-    #     self.navigate_posekey("LD1")
-    #     mail = [0, 0]
-    #     response = self.throw_proxy(*mail)
-    #     if response.success:
-    #         print("投掷成功")
-    #     else:
-    #         print("投掷失败")
-        
-    #     self.navigate_posekey("start") # 返回起始位置
-    #     print("返回起始位置")
 
     def run(self):
         ## 主程序
         self.welcome() # 欢迎界面
-        self.calibratePose("start")
-        self.takeshelfPic_L() # 货架拍照左侧
-        self.navigate_posekey("start") # 返回起始位置
+        self.photo_shelf_proxy(1) # 货架拍照
         
 if __name__ == "__main__":
     position_path = "/home/eaibot/nju_ws/src/motion_control/config/position.txt"

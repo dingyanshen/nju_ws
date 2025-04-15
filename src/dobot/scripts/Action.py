@@ -220,16 +220,16 @@ class Dobot():
         calculate_PWM = (calculate_PWM1 + calculate_PWM2) / 2
         self.setTheta(0)
         rospy.sleep(0.1)
-        self.setPose(0+error_x,300+error_y,height1+20,0)
+        self.setPose(0+error_x,313,height1+20,0)
         rospy.sleep(0.1)
         self.setTheta(calculate_PWM)
         rospy.sleep(0.6)
-        self.setPose(0+error_x,300+error_y,height1,0)
+        self.setPose(0+error_x,313,height1,0)
         self.suckupObject()
         rospy.sleep(0.3)
-        self.setPose(0+error_x,300+error_y,height1+15,0)
+        self.setPose(0+error_x,313,height1+15,0)
         rospy.sleep(0.1)
-        self.setPose(0+error_x,175+error_y,height1+15,0)
+        self.setPose(0+error_x,143,height1/3.5+6,0)
         rospy.sleep(0.1)
         self.setPose(250,0,height1+15,0)
         self.setPose(250,0,height2,0)
@@ -263,14 +263,14 @@ if __name__ == '__main__':
     dobot.setIOMultiplexing(8, 2)
     dobot.setTheta(1)
 
-    # dobot.CatchBox(0, 0, 0, 0) #1上1上
-    # dobot.CatchBox(1, 1, 0, 0) #1上1上
+    dobot.CatchBox(0, 0, 0, 0) #1上1上
+    dobot.CatchBox(1, 1, 0, 0) #1上1上
     # dobot.ThrowBox(1, 1) #上方邮件投掷到右侧邮箱 1上1右
     # dobot.ThrowBox(0, 1) #上方邮件投掷到右侧邮箱 1上1右
 
-    # while True:
-    #     pose = dobot.getPose()
-    #     print('x: %.2f, y: %.2f, z: %.2f, r: %.2f' % (pose[0], pose[1], pose[2], pose[3]))
-    #     pwm = dobot.getPWM()
-    #     print('PWM: %.2f' % pwm)
-    #     rospy.sleep(1)
+    while True:
+        pose = dobot.getPose()
+        print('x: %.2f, y: %.2f, z: %.2f, r: %.2f' % (pose[0], pose[1], pose[2], pose[3]))
+        pwm = dobot.getPWM()
+        print('PWM: %.2f' % pwm)
+        rospy.sleep(1)
