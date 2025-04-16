@@ -136,7 +136,6 @@ struct Definition< ::camera::PhotoboxServiceRequest_<ContainerAllocator> >
   static const char* value()
   {
     return "\n\
-\n\
 ";
   }
 

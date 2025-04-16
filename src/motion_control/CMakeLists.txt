@@ -43,13 +43,9 @@ include_directories(
 )
 
 install(PROGRAMS
-  scripts/analyze_data.py
   scripts/basic_move.py
   scripts/lidar.py
   scripts/pid.py
-  scripts/record_dist.py
-  scripts/record_pose.py
-  scripts/sonar.py
   scripts/main_process.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

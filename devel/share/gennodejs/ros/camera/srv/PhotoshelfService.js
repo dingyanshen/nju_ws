@@ -66,11 +66,7 @@ class PhotoshelfServiceRequest {
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    
-    
     int32 type
-    
-    
     
     `;
   }

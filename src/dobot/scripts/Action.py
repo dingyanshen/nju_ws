@@ -258,17 +258,19 @@ class Dobot():
 
 if __name__ == '__main__':
     dobot = Dobot()
-    #dobot.setHome()
+    # dobot.setHome()
     dobot.setPTPCommonParams(1000.0, 1000.0)
     dobot.setPTPCoordinateParams(1000, 1000, 200, 200)
     dobot.clearAlarmsState()
     dobot.setIOMultiplexing(8, 2)
-    dobot.setTheta(1)
+    dobot.setPose(250,0,0,0)
+    rospy.sleep(0.1)
+    dobot.setTheta(0)
 
-    dobot.CatchBox(0, 0, 0, 0) #1上1上
-    dobot.CatchBox(1, 1, 0, 0) #1上1上
-    # dobot.ThrowBox(1, 1) #上方邮件投掷到右侧邮箱 1上1右
-    # dobot.ThrowBox(0, 1) #上方邮件投掷到右侧邮箱 1上1右
+    # dobot.CatchBox(0, 0, 0, 0) #把下层邮件抓取到下方
+    # dobot.CatchBox(1, 1, 0, 0) #把上层邮件抓取到上方
+    # dobot.ThrowBox(1, 0) #把上层邮件投掷到左侧邮箱
+    # dobot.ThrowBox(0, 0) #把下层邮件投掷到左侧邮箱
 
     while True:
         pose = dobot.getPose()

@@ -153,11 +153,7 @@
 (setf (get camera::PhotoshelfServiceRequest :md5sum-) "b956cbec76bf70325b60df673b2d7722")
 (setf (get camera::PhotoshelfServiceRequest :datatype-) "camera/PhotoshelfServiceRequest")
 (setf (get camera::PhotoshelfServiceRequest :definition-)
-      "
-
-int32 type
-
-
+      "int32 type
 ---
 int32[] results
 int32[] positions_z
@@ -167,11 +163,7 @@ int32[] positions_x
 (setf (get camera::PhotoshelfServiceResponse :md5sum-) "b956cbec76bf70325b60df673b2d7722")
 (setf (get camera::PhotoshelfServiceResponse :datatype-) "camera/PhotoshelfServiceResponse")
 (setf (get camera::PhotoshelfServiceResponse :definition-)
-      "
-
-int32 type
-
-
+      "int32 type
 ---
 int32[] results
 int32[] positions_z

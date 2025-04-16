@@ -11,20 +11,18 @@ class DobotServiceNode:
         rospy.init_node('dobot_service')
         self.service_grasp = rospy.Service('dobot_grasp_service', GraspService, self.handle_grasp)
         self.service_throw = rospy.Service('dobot_throw_service', ThrowService, self.handle_throw)
-        # 初始化Dobot机械臂控制
         self.dobot = Action.Dobot()
         self.dobot.setPTPCommonParams(1000.0, 1000.0)
         self.dobot.setPTPCoordinateParams(1000, 1000, 200, 200)
-        #self.dobot.setHome()
+        # self.dobot.setHome()
         self.dobot.clearAlarmsState()
         self.dobot.setIOMultiplexing(8, 2)
-        self.dobot.setTheta(0)
-        rospy.sleep(0.1)
         self.dobot.setPose(250,0,0,0)
+        rospy.sleep(0.1)
+        self.dobot.setTheta(0)
 
     def handle_grasp(self, req):
         rospy.loginfo("Grasping mail...")
-        # 控制Dobot机械臂移动到目标位置并抓取
         try:
             self.dobot.CatchBox(req.shelf_z, req.pos_z, req.error_x, req.error_y)
             return GraspServiceResponse(True)
@@ -34,7 +32,6 @@ class DobotServiceNode:
         
     def handle_throw(self, req):
         rospy.loginfo("Throwing mail...")
-        # 控制Dobot机械臂移动到目标位置并投掷
         try:
             self.dobot.ThrowBox(req.pos_z, req.mailbox_pos)
             return ThrowServiceResponse(True)

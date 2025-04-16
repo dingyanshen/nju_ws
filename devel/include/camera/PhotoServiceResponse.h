@@ -24,27 +24,14 @@ struct PhotoServiceResponse_
   typedef PhotoServiceResponse_<ContainerAllocator> Type;
 
   PhotoServiceResponse_()
-    : provinces()
-    , positions_x()
-    , positions_y()  {
+    {
     }
   PhotoServiceResponse_(const ContainerAllocator& _alloc)
-    : provinces(_alloc)
-    , positions_x(_alloc)
-    , positions_y(_alloc)  {
+    {
   (void)_alloc;
     }
 
 
-
-   typedef std::vector<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > , typename ContainerAllocator::template rebind<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::other >  _provinces_type;
-  _provinces_type provinces;
-
-   typedef std::vector<float, typename ContainerAllocator::template rebind<float>::other >  _positions_x_type;
-  _positions_x_type positions_x;
-
-   typedef std::vector<float, typename ContainerAllocator::template rebind<float>::other >  _positions_y_type;
-  _positions_y_type positions_y;
 
 
 
@@ -80,7 +67,7 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
 // {'camera': ['/home/eaibot/nju_ws/src/camera/msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
@@ -90,12 +77,12 @@ namespace message_traits
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::camera::PhotoServiceResponse_<ContainerAllocator> >
-  : FalseType
+  : TrueType
   { };
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::camera::PhotoServiceResponse_<ContainerAllocator> const>
-  : FalseType
+  : TrueType
   { };
 
 template <class ContainerAllocator>
@@ -124,12 +111,12 @@ struct MD5Sum< ::camera::PhotoServiceResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "62345d15c2a8f524d173f0fa9a44e6e3";
+    return "d41d8cd98f00b204e9800998ecf8427e";
   }
 
   static const char* value(const ::camera::PhotoServiceResponse_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x62345d15c2a8f524ULL;
-  static const uint64_t static_value2 = 0xd173f0fa9a44e6e3ULL;
+  static const uint64_t static_value1 = 0xd41d8cd98f00b204ULL;
+  static const uint64_t static_value2 = 0xe9800998ecf8427eULL;
 };
 
 template<class ContainerAllocator>
@@ -148,9 +135,7 @@ struct Definition< ::camera::PhotoServiceResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "string[] provinces\n\
-float32[] positions_x\n\
-float32[] positions_y\n\
+    return "\n\
 ";
   }
 
@@ -167,12 +152,8 @@ namespace serialization
 
   template<class ContainerAllocator> struct Serializer< ::camera::PhotoServiceResponse_<ContainerAllocator> >
   {
-    template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
-    {
-      stream.next(m.provinces);
-      stream.next(m.positions_x);
-      stream.next(m.positions_y);
-    }
+    template<typename Stream, typename T> inline static void allInOne(Stream&, T)
+    {}
 
     ROS_DECLARE_ALLINONE_SERIALIZER
   }; // struct PhotoServiceResponse_
@@ -188,27 +169,8 @@ namespace message_operations
 template<class ContainerAllocator>
 struct Printer< ::camera::PhotoServiceResponse_<ContainerAllocator> >
 {
-  template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::camera::PhotoServiceResponse_<ContainerAllocator>& v)
-  {
-    s << indent << "provinces[]" << std::endl;
-    for (size_t i = 0; i < v.provinces.size(); ++i)
-    {
-      s << indent << "  provinces[" << i << "]: ";
-      Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.provinces[i]);
-    }
-    s << indent << "positions_x[]" << std::endl;
-    for (size_t i = 0; i < v.positions_x.size(); ++i)
-    {
-      s << indent << "  positions_x[" << i << "]: ";
-      Printer<float>::stream(s, indent + "  ", v.positions_x[i]);
-    }
-    s << indent << "positions_y[]" << std::endl;
-    for (size_t i = 0; i < v.positions_y.size(); ++i)
-    {
-      s << indent << "  positions_y[" << i << "]: ";
-      Printer<float>::stream(s, indent + "  ", v.positions_y[i]);
-    }
-  }
+  template<typename Stream> static void stream(Stream&, const std::string&, const ::camera::PhotoServiceResponse_<ContainerAllocator>&)
+  {}
 };
 
 } // namespace message_operations

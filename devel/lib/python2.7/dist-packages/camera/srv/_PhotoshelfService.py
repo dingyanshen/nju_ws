@@ -10,11 +10,7 @@ class PhotoshelfServiceRequest(genpy.Message):
   _md5sum = "bda37decd5e3814bcc042f341d2e60a1"
   _type = "camera/PhotoshelfServiceRequest"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """
-
-int32 type
-
-
+  _full_text = """int32 type
 """
   __slots__ = ['type']
   _slot_types = ['int32']

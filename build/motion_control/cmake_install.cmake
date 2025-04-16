@@ -92,13 +92,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/motion_control" TYPE PROGRAM FILES
-    "/home/eaibot/nju_ws/src/motion_control/scripts/analyze_data.py"
     "/home/eaibot/nju_ws/src/motion_control/scripts/basic_move.py"
     "/home/eaibot/nju_ws/src/motion_control/scripts/lidar.py"
     "/home/eaibot/nju_ws/src/motion_control/scripts/pid.py"
-    "/home/eaibot/nju_ws/src/motion_control/scripts/record_dist.py"
-    "/home/eaibot/nju_ws/src/motion_control/scripts/record_pose.py"
-    "/home/eaibot/nju_ws/src/motion_control/scripts/sonar.py"
     "/home/eaibot/nju_ws/src/motion_control/scripts/main_process.py"
     )
 endif()

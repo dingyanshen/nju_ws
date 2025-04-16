@@ -97,18 +97,14 @@
 (setf (get camera::PhotoboxServiceRequest :md5sum-) "034a8e20d6a306665e3a5b340fab3f09")
 (setf (get camera::PhotoboxServiceRequest :datatype-) "camera/PhotoboxServiceRequest")
 (setf (get camera::PhotoboxServiceRequest :definition-)
-      "
-
----
+      "---
 int32 result
 ")
 
 (setf (get camera::PhotoboxServiceResponse :md5sum-) "034a8e20d6a306665e3a5b340fab3f09")
 (setf (get camera::PhotoboxServiceResponse :datatype-) "camera/PhotoboxServiceResponse")
 (setf (get camera::PhotoboxServiceResponse :definition-)
-      "
-
----
+      "---
 int32 result
 ")
 

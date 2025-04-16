@@ -1,7 +1,1 @@
-# 江苏 js 浙江 zj 安徽 ah 河南 he 湖南 hu 四川 sc 广东 gd 福建 fj 无效 wx
-# 江苏 1  浙江 2  安徽 3  河南 4  湖南 5  四川 6  广东 7  福建 8  无效 0
-string shelf_id        # 货架位置信息（如坐标或编号）
 ---
-string[] provinces     # 省份列表
-float32[] positions_x  # 每个邮件的x坐标
-float32[] positions_y  # 每个邮件的y坐标

@@ -59,10 +59,10 @@
   "b956cbec76bf70325b60df673b2d7722")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<PhotoshelfService-request>)))
   "Returns full string definition for message of type '<PhotoshelfService-request>"
-  (cl:format cl:nil "~%~%int32 type~%~%~%~%~%"))
+  (cl:format cl:nil "int32 type~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'PhotoshelfService-request)))
   "Returns full string definition for message of type 'PhotoshelfService-request"
-  (cl:format cl:nil "~%~%int32 type~%~%~%~%~%"))
+  (cl:format cl:nil "int32 type~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <PhotoshelfService-request>))
   (cl:+ 0
      4

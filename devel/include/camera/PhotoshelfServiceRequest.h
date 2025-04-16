@@ -138,11 +138,7 @@ struct Definition< ::camera::PhotoshelfServiceRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "\n\
-\n\
-int32 type\n\
-\n\
-\n\
+    return "int32 type\n\
 ";
   }
 

@@ -38,10 +38,10 @@
   "034a8e20d6a306665e3a5b340fab3f09")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<PhotoboxService-request>)))
   "Returns full string definition for message of type '<PhotoboxService-request>"
-  (cl:format cl:nil "~%~%~%~%"))
+  (cl:format cl:nil "~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'PhotoboxService-request)))
   "Returns full string definition for message of type 'PhotoboxService-request"
-  (cl:format cl:nil "~%~%~%~%"))
+  (cl:format cl:nil "~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <PhotoboxService-request>))
   (cl:+ 0
 ))

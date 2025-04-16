@@ -16,29 +16,24 @@ def calculate(frame, points):
     square_min_y = min_y
     square_max_x = min_x + side_length
     square_max_y = min_y + side_length
-
     adjusted_coordinates = {
         "top_left": (square_min_x - 3.0 * side_length, square_min_y + 0.4 * side_length),
         "bottom_left": (square_min_x - 3.0 * side_length, square_max_y),
         "top_right": (square_max_x - 0.8 * side_length, square_min_y + 0.4 * side_length),
         "bottom_right": (square_max_x - 0.8 * side_length, square_max_y)
     }
-
     crop_min_x = int(adjusted_coordinates["top_left"][0])
     crop_min_y = int(adjusted_coordinates["top_left"][1])
     crop_max_x = int(adjusted_coordinates["bottom_right"][0])
     crop_max_y = int(adjusted_coordinates["bottom_right"][1])
-
     crop_min_x = max(0, crop_min_x)
     crop_min_y = max(0, crop_min_y)
     crop_max_x = min(frame.shape[1], crop_max_x)
     crop_max_y = min(frame.shape[0], crop_max_y)
-
     cropped_image = frame[crop_min_y:crop_max_y, crop_min_x:crop_max_x]
     image_name = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
     image_cropped_path = "/home/eaibot/nju_ws/src/camera/img/cropped_image_{}.jpg".format(image_name)
     cv2.imwrite(image_cropped_path, cropped_image, [cv2.IMWRITE_PNG_COMPRESSION, 0])
-
     return image_cropped_path
 
 def qrcode_barcodes():
@@ -105,10 +100,8 @@ if __name__ == "__main__":
     province_match_double =['江苏', '浙江', '安徽', '河南', '湖南', '四川', '广东', '福建']
     province_num = [1, 2, 3, 3, 4, 5, 6, 6, 7, 7, 8, 8]
     print("Server is running...")
-
     while True:
         message = socket.recv_string()
-
         try:
             if message.startswith("/home/eaibot/nju_ws/src/camera/img/qrcode_barcodes_image"):
                 qrcode_barcodes()
@@ -123,6 +116,5 @@ if __name__ == "__main__":
             else:
                 print("Invalid message received:", message)
                 socket.send(b"0")
-
         except Exception as e:
             socket.send(b"0")

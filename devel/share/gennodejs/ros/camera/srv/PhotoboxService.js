@@ -56,8 +56,6 @@ class PhotoboxServiceRequest {
     // Returns full string definition for message
     return `
     
-    
-    
     `;
   }
 

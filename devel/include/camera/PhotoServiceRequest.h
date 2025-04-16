@@ -24,17 +24,14 @@ struct PhotoServiceRequest_
   typedef PhotoServiceRequest_<ContainerAllocator> Type;
 
   PhotoServiceRequest_()
-    : shelf_id()  {
+    {
     }
   PhotoServiceRequest_(const ContainerAllocator& _alloc)
-    : shelf_id(_alloc)  {
+    {
   (void)_alloc;
     }
 
 
-
-   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _shelf_id_type;
-  _shelf_id_type shelf_id;
 
 
 
@@ -70,7 +67,7 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
 // {'camera': ['/home/eaibot/nju_ws/src/camera/msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
@@ -80,12 +77,12 @@ namespace message_traits
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::camera::PhotoServiceRequest_<ContainerAllocator> >
-  : FalseType
+  : TrueType
   { };
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::camera::PhotoServiceRequest_<ContainerAllocator> const>
-  : FalseType
+  : TrueType
   { };
 
 template <class ContainerAllocator>
@@ -114,12 +111,12 @@ struct MD5Sum< ::camera::PhotoServiceRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "6fb1aafe191b3038cc37331cd337f99f";
+    return "d41d8cd98f00b204e9800998ecf8427e";
   }
 
   static const char* value(const ::camera::PhotoServiceRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x6fb1aafe191b3038ULL;
-  static const uint64_t static_value2 = 0xcc37331cd337f99fULL;
+  static const uint64_t static_value1 = 0xd41d8cd98f00b204ULL;
+  static const uint64_t static_value2 = 0xe9800998ecf8427eULL;
 };
 
 template<class ContainerAllocator>
@@ -139,8 +136,6 @@ struct Definition< ::camera::PhotoServiceRequest_<ContainerAllocator> >
   static const char* value()
   {
     return "\n\
-\n\
-string shelf_id\n\
 ";
   }
 
@@ -157,10 +152,8 @@ namespace serialization
 
   template<class ContainerAllocator> struct Serializer< ::camera::PhotoServiceRequest_<ContainerAllocator> >
   {
-    template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
-    {
-      stream.next(m.shelf_id);
-    }
+    template<typename Stream, typename T> inline static void allInOne(Stream&, T)
+    {}
 
     ROS_DECLARE_ALLINONE_SERIALIZER
   }; // struct PhotoServiceRequest_
@@ -176,11 +169,8 @@ namespace message_operations
 template<class ContainerAllocator>
 struct Printer< ::camera::PhotoServiceRequest_<ContainerAllocator> >
 {
-  template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::camera::PhotoServiceRequest_<ContainerAllocator>& v)
-  {
-    s << indent << "shelf_id: ";
-    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.shelf_id);
-  }
+  template<typename Stream> static void stream(Stream&, const std::string&, const ::camera::PhotoServiceRequest_<ContainerAllocator>&)
+  {}
 };
 
 } // namespace message_operations

@@ -7,15 +7,12 @@ import struct
 
 
 class PhotoServiceRequest(genpy.Message):
-  _md5sum = "6fb1aafe191b3038cc37331cd337f99f"
+  _md5sum = "d41d8cd98f00b204e9800998ecf8427e"
   _type = "camera/PhotoServiceRequest"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """
-
-string shelf_id
-"""
-  __slots__ = ['shelf_id']
-  _slot_types = ['string']
+  _full_text = """"""
+  __slots__ = []
+  _slot_types = []
 
   def __init__(self, *args, **kwds):
     """
@@ -25,7 +22,7 @@ string shelf_id
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       shelf_id
+       
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -33,11 +30,6 @@ string shelf_id
     """
     if args or kwds:
       super(PhotoServiceRequest, self).__init__(*args, **kwds)
-      #message fields cannot be None, assign default values for those that are
-      if self.shelf_id is None:
-        self.shelf_id = ''
-    else:
-      self.shelf_id = ''
 
   def _get_types(self):
     """
@@ -51,12 +43,7 @@ string shelf_id
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self.shelf_id
-      length = len(_x)
-      if python3 or type(_x) == unicode:
-        _x = _x.encode('utf-8')
-        length = len(_x)
-      buff.write(struct.pack('<I%ss'%length, length, _x))
+      pass
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -67,15 +54,6 @@ string shelf_id
     """
     try:
       end = 0
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      start = end
-      end += length
-      if python3:
-        self.shelf_id = str[start:end].decode('utf-8')
-      else:
-        self.shelf_id = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -88,12 +66,7 @@ string shelf_id
     :param numpy: numpy python module
     """
     try:
-      _x = self.shelf_id
-      length = len(_x)
-      if python3 or type(_x) == unicode:
-        _x = _x.encode('utf-8')
-        length = len(_x)
-      buff.write(struct.pack('<I%ss'%length, length, _x))
+      pass
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -105,15 +78,6 @@ string shelf_id
     """
     try:
       end = 0
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      start = end
-      end += length
-      if python3:
-        self.shelf_id = str[start:end].decode('utf-8')
-      else:
-        self.shelf_id = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -131,15 +95,12 @@ import struct
 
 
 class PhotoServiceResponse(genpy.Message):
-  _md5sum = "62345d15c2a8f524d173f0fa9a44e6e3"
+  _md5sum = "d41d8cd98f00b204e9800998ecf8427e"
   _type = "camera/PhotoServiceResponse"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """string[] provinces
-float32[] positions_x
-float32[] positions_y
-"""
-  __slots__ = ['provinces','positions_x','positions_y']
-  _slot_types = ['string[]','float32[]','float32[]']
+  _full_text = """"""
+  __slots__ = []
+  _slot_types = []
 
   def __init__(self, *args, **kwds):
     """
@@ -149,7 +110,7 @@ float32[] positions_y
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       provinces,positions_x,positions_y
+       
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -157,17 +118,6 @@ float32[] positions_y
     """
     if args or kwds:
       super(PhotoServiceResponse, self).__init__(*args, **kwds)
-      #message fields cannot be None, assign default values for those that are
-      if self.provinces is None:
-        self.provinces = []
-      if self.positions_x is None:
-        self.positions_x = []
-      if self.positions_y is None:
-        self.positions_y = []
-    else:
-      self.provinces = []
-      self.positions_x = []
-      self.positions_y = []
 
   def _get_types(self):
     """
@@ -181,22 +131,7 @@ float32[] positions_y
     :param buff: buffer, ``StringIO``
     """
     try:
-      length = len(self.provinces)
-      buff.write(_struct_I.pack(length))
-      for val1 in self.provinces:
-        length = len(val1)
-        if python3 or type(val1) == unicode:
-          val1 = val1.encode('utf-8')
-          length = len(val1)
-        buff.write(struct.pack('<I%ss'%length, length, val1))
-      length = len(self.positions_x)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sf'%length
-      buff.write(struct.pack(pattern, *self.positions_x))
-      length = len(self.positions_y)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sf'%length
-      buff.write(struct.pack(pattern, *self.positions_y))
+      pass
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -207,35 +142,6 @@ float32[] positions_y
     """
     try:
       end = 0
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      self.provinces = []
-      for i in range(0, length):
-        start = end
-        end += 4
-        (length,) = _struct_I.unpack(str[start:end])
-        start = end
-        end += length
-        if python3:
-          val1 = str[start:end].decode('utf-8')
-        else:
-          val1 = str[start:end]
-        self.provinces.append(val1)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sf'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.positions_x = struct.unpack(pattern, str[start:end])
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sf'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.positions_y = struct.unpack(pattern, str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -248,22 +154,7 @@ float32[] positions_y
     :param numpy: numpy python module
     """
     try:
-      length = len(self.provinces)
-      buff.write(_struct_I.pack(length))
-      for val1 in self.provinces:
-        length = len(val1)
-        if python3 or type(val1) == unicode:
-          val1 = val1.encode('utf-8')
-          length = len(val1)
-        buff.write(struct.pack('<I%ss'%length, length, val1))
-      length = len(self.positions_x)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sf'%length
-      buff.write(self.positions_x.tostring())
-      length = len(self.positions_y)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sf'%length
-      buff.write(self.positions_y.tostring())
+      pass
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -275,35 +166,6 @@ float32[] positions_y
     """
     try:
       end = 0
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      self.provinces = []
-      for i in range(0, length):
-        start = end
-        end += 4
-        (length,) = _struct_I.unpack(str[start:end])
-        start = end
-        end += length
-        if python3:
-          val1 = str[start:end].decode('utf-8')
-        else:
-          val1 = str[start:end]
-        self.provinces.append(val1)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sf'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.positions_x = numpy.frombuffer(str[start:end], dtype=numpy.float32, count=length)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sf'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.positions_y = numpy.frombuffer(str[start:end], dtype=numpy.float32, count=length)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -314,6 +176,6 @@ def _get_struct_I():
     return _struct_I
 class PhotoService(object):
   _type          = 'camera/PhotoService'
-  _md5sum = '16caea922424b37c40c5b1fe9cbf0c1b'
+  _md5sum = 'd41d8cd98f00b204e9800998ecf8427e'
   _request_class  = PhotoServiceRequest
   _response_class = PhotoServiceResponse
