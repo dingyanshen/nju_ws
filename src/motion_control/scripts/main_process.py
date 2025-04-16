@@ -425,7 +425,11 @@ class MainController:
     def run(self):
         ## 主程序
         self.welcome() # 欢迎界面
-        self.photo_shelf_proxy(1) # 货架拍照
+        self.calibratePose("start") # 校准位姿
+        self.takeboxPic_RU()
+        self.takeboxPic_RD()
+        self.takeshelfPic_R()
+        self.navigate_posekey("start") # 回到起始点
         
 if __name__ == "__main__":
     position_path = "/home/eaibot/nju_ws/src/motion_control/config/position.txt"

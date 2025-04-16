@@ -220,18 +220,20 @@ class Dobot():
         calculate_PWM = (calculate_PWM1 + calculate_PWM2) / 2
         self.setTheta(0)
         rospy.sleep(0.1)
-        self.setPose(0+error_x,313,height1+20,0)
+        self.setPose(0+error_x,305,height1+20,0)
         rospy.sleep(0.1)
         self.setTheta(calculate_PWM)
         rospy.sleep(0.6)
-        self.setPose(0+error_x,313,height1,0)
+        self.setPose(0+error_x,305,height1,0)
         self.suckupObject()
         rospy.sleep(0.3)
-        self.setPose(0+error_x,313,height1+15,0)
+        self.setPose(0+error_x,305,height1+20,0)
         rospy.sleep(0.1)
-        self.setPose(0+error_x,143,height1/3.5+6,0)
+        self.setPose(0+error_x,200,height1+20,0)
         rospy.sleep(0.1)
-        self.setPose(250,0,height1+15,0)
+        self.setPose(0+error_x,143,height1/3.5-5,0)
+        rospy.sleep(0.1)
+        self.setPose(250,0,height1/3.5-5,0)
         self.setPose(250,0,height2,0)
         self.setTheta(0)
         rospy.sleep(0.6)
@@ -241,16 +243,16 @@ class Dobot():
     
     def CatchBox(self, shelf_z, pos_z, error_x, error_y): #抓取快递盒
         if shelf_z == 1 and pos_z == 1:
-            self.Catch(50, -10, error_x, error_y) #货架上层邮件抓取到上方
+            self.Catch(85, -10, error_x, error_y) #货架上层邮件抓取到上方
             print('货架上层邮件抓取到上方')
         elif shelf_z == 1 and pos_z == 0:
-            self.Catch(50, -40, error_x, error_y) #货架上层邮件抓取到下方
+            self.Catch(85, -40, error_x, error_y) #货架上层邮件抓取到下方
             print('货架上层邮件抓取到下方')
         elif shelf_z == 0 and pos_z == 1:
-            self.Catch(-65, -10, error_x, error_y) #货架下层邮件抓取到上方
+            self.Catch(-30, -10, error_x, error_y) #货架下层邮件抓取到上方
             print('货架下层邮件抓取到上方')
         elif shelf_z == 0 and pos_z == 0:
-            self.Catch(-65, -40, error_x, error_y) #货架下层邮件抓取到下方
+            self.Catch(-30, -40, error_x, error_y) #货架下层邮件抓取到下方
             print('货架下层邮件抓取到下方')
         return True
 

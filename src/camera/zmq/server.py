@@ -17,36 +17,23 @@ def calculate(frame, points):
     square_max_x = min_x + side_length
     square_max_y = min_y + side_length
 
-    # 原始正方形的坐标
-    square_coordinates = {
-        "top_left": (square_min_x, square_min_y),
-        "bottom_right": (square_max_x, square_max_y)
-    }
-
-    # 计算调整后的坐标
     adjusted_coordinates = {
-        "top_left": (square_min_x - 3.0 * side_length, square_min_y),
+        "top_left": (square_min_x - 3.0 * side_length, square_min_y + 0.4 * side_length),
         "bottom_left": (square_min_x - 3.0 * side_length, square_max_y),
-        "top_right": (square_max_x - 0.5 * side_length, square_min_y),
-        "bottom_right": (square_max_x - 0.5 * side_length, square_max_y)
+        "top_right": (square_max_x - 0.8 * side_length, square_min_y + 0.4 * side_length),
+        "bottom_right": (square_max_x - 0.8 * side_length, square_max_y)
     }
 
-    print("Original square coordinates:", square_coordinates)
-    print("Adjusted square coordinates:", adjusted_coordinates)
-
-    # 切割图片
     crop_min_x = int(adjusted_coordinates["top_left"][0])
     crop_min_y = int(adjusted_coordinates["top_left"][1])
     crop_max_x = int(adjusted_coordinates["bottom_right"][0])
     crop_max_y = int(adjusted_coordinates["bottom_right"][1])
 
-    # 确保坐标在图像范围内
     crop_min_x = max(0, crop_min_x)
     crop_min_y = max(0, crop_min_y)
     crop_max_x = min(frame.shape[1], crop_max_x)
     crop_max_y = min(frame.shape[0], crop_max_y)
 
-    # 切割并保存图片
     cropped_image = frame[crop_min_y:crop_max_y, crop_min_x:crop_max_x]
     image_name = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
     image_cropped_path = "/home/eaibot/nju_ws/src/camera/img/cropped_image_{}.jpg".format(image_name)
