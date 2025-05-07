@@ -32,7 +32,7 @@ class MainController:
         self.grasp_proxy = rospy.ServiceProxy('dobot_grasp_service', GraspService)
         self.throw_proxy = rospy.ServiceProxy('dobot_throw_service', ThrowService)
 
-        self.mail_table = [] # results.position_z.position_x
+        self.mail_table = [] # results.positions_z.positions_x
         self.mail_box = [] # box_id.result
         self.priority_provinces = [] # 省份优先级
 
@@ -83,12 +83,12 @@ class MainController:
         originalPose.header.frame_id = "map"
         originalPose.header.stamp = rospy.Time.now()
         originalPose.pose.pose = self.position[poseKey]
-        originalPose.pose.covariance[0] = 0.25
-        originalPose.pose.covariance[6 * 1 + 1] = 0.25
-        originalPose.pose.covariance[6 * 5 + 5] = 0.06853891945200942
+        originalPose.pose.covariance[0] = 0.01
+        originalPose.pose.covariance[6 * 1 + 1] = 0.01
+        originalPose.pose.covariance[6 * 5 + 5] = 0.01
         for _ in range(10):
             self.pub_initialpose.publish(originalPose)
-            rospy.sleep(0.05)
+            rospy.sleep(0.1)
         rospy.sleep(0.5)
         print("Calibrate pose " + str(poseKey) + " successfully!")
 
@@ -180,31 +180,31 @@ class MainController:
             if type == 1 or type == 2 or type == 5 or type == 6:
                 for i in range(4):
                     self.mail_table.append({
-                        'results': response[0][i],
-                        'position_z': response[1][i],
-                        'position_x': response[2][i],
+                        'results': response.results[i],
+                        'positions_z': response.positions_z[i],
+                        'positions_x': response.positions_x[i],
                     })
             elif type == 3:
                 self.mail_table.append({
-                    'results': response[0][0],
-                    'position_z': response[1][0],
-                    'position_x': response[2][0],
+                    'results': response.results[0],
+                    'positions_z': response.positions_z[0],
+                    'positions_x': response.positions_x[0],
                 })
                 self.mail_table.append({
-                    'results': response[0][2],
-                    'position_z': response[1][2],
-                    'position_x': response[2][2],
+                    'results': response.results[2],
+                    'positions_z': response.positions_z[2],
+                    'positions_x': response.positions_x[2],
                 })
             elif type == 4:
                 self.mail_table.append({
-                    'results': response[0][1],
-                    'position_z': response[1][1],
-                    'position_x': response[2][1],
+                    'results': response.results[1],
+                    'positions_z': response.positions_z[1],
+                    'positions_x': response.positions_x[1],
                 })
                 self.mail_table.append({
-                    'results': response[0][3],
-                    'position_z': response[1][3],
-                    'position_x': response[2][3],
+                    'results': response.results[3],
+                    'positions_z': response.positions_z[3],
+                    'positions_x': response.positions_x[3],
                 })
         except rospy.ServiceException as e:
             rospy.logerr("Photo service call failed: {e}")
@@ -223,7 +223,7 @@ class MainController:
     
     def grasp_mail(self, mail): # 抓取邮件
         try:
-            self.navigate_posekey("CL+{mail['position_x']}")
+            self.navigate_posekey("CL" + str(mail['positions_x']))
             if mail[1] == 1: # 上层
                 catch_type = [1, 1, 0, 0]
                 response = self.grasp_proxy(*catch_type)
@@ -330,7 +330,7 @@ class MainController:
         self.process_non_priority_mails() # 处理非优先省份邮件
 
         self.end() # 结束界面
-        
+
 if __name__ == "__main__":
     position_path = "/home/eaibot/nju_ws/src/motion_control/config/position.txt"
     controller = MainController(position_path)

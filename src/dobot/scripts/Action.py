@@ -266,9 +266,9 @@ if __name__ == '__main__':
     dobot.setPose(250,0,0,0)
     rospy.sleep(0.1)
     dobot.setTheta(0)
+    dobot.CatchBox(1, 0, 0, 0) #把上层邮件抓取到上方
+    dobot.CatchBox(0, 1, 0, 0) #把下层邮件抓取到下方
 
-    # dobot.CatchBox(0, 0, 0, 0) #把下层邮件抓取到下方
-    # dobot.CatchBox(1, 1, 0, 0) #把上层邮件抓取到上方
     # dobot.ThrowBox(1, 0) #把上层邮件投掷到左侧邮箱
     # dobot.ThrowBox(0, 0) #把下层邮件投掷到左侧邮箱
 
