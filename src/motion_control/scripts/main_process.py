@@ -35,6 +35,7 @@ class MainController:
         self.mail_table = [] # results.positions_z.positions_x
         self.mail_box = [] # box_id.result
         self.priority_provinces = [] # 省份优先级
+        self.platform_state = 0 # 平台状态
 
     def loadToDict(self, file_path, mode): # 导入相关参数
         print("Loading " + str(mode) + "...")
@@ -86,7 +87,7 @@ class MainController:
         originalPose.pose.covariance[0] = 0.01
         originalPose.pose.covariance[6 * 1 + 1] = 0.01
         originalPose.pose.covariance[6 * 5 + 5] = 0.01
-        for _ in range(10):
+        for _ in range(20):
             self.pub_initialpose.publish(originalPose)
             rospy.sleep(0.1)
         rospy.sleep(0.5)
@@ -114,38 +115,38 @@ class MainController:
     def takeboxPic_RU(self): # 邮箱文字识别[右上]
         self.navigate_posekey("ARU2")
         print("ARU2 is arrived.")
-        self.process_box("ARU2")
+        self.process_box("RU2")
 
         self.navigate_posekey("ARU1")
         print("ARU1 is arrived.")
-        self.process_box("ARU1")
+        self.process_box("RU1")
 
     def takeboxPic_RD(self): # 邮箱文字识别[右下]
         self.navigate_posekey("ARD2")
         print("ARD2 is arrived.")
-        self.process_box("ARD2")
+        self.process_box("RD2")
 
         self.navigate_posekey("ARD1")
         print("ARD1 is arrived.")
-        self.process_box("ARD1")
+        self.process_box("RD1")
         
     def takeboxPic_LU(self): # 邮箱文字识别[左上]
         self.navigate_posekey("ALU1")
         print("ALU1 is arrived.")
-        self.process_box("ALU1")
+        self.process_box("LU1")
 
         self.navigate_posekey("ALU2")
         print("ALU2 is arrived.")
-        self.process_box("ALU2")
+        self.process_box("LU2")
 
     def takeboxPic_LD(self): # 邮箱文字识别[左下]
         self.navigate_posekey("ALD1")
         print("ALD1 is arrived.")
-        self.process_box("ALD1")
+        self.process_box("LD1")
 
         self.navigate_posekey("ALD2")
         print("ALD2 is arrived.")
-        self.process_box("ALD2")
+        self.process_box("LD2")
                 
     def takeshelfPic_R(self): # 货架拍照[右侧]
         self.navigate_posekey("RP1")
@@ -224,12 +225,22 @@ class MainController:
     def grasp_mail(self, mail): # 抓取邮件
         try:
             self.navigate_posekey("CL" + str(mail['positions_x']))
-            if mail[1] == 1: # 上层
+            if mail['positions_z'] == 1 and self.platform_state == 0: # 上层抓到下层
+                catch_type = [1, 0, 0, 0]
+                response = self.grasp_proxy(*catch_type)
+                self.platform_state = 1
+            elif mail['positions_z'] == 1 and self.platform_state == 1: # 上层抓到上层
                 catch_type = [1, 1, 0, 0]
                 response = self.grasp_proxy(*catch_type)
-            elif mail[1] == 2: # 下层
+                self.platform_state = 2
+            elif mail['positions_z'] == 2 and self.platform_state == 0: # 下层抓到下层
+                catch_type = [0, 0, 0, 0]
+                response = self.grasp_proxy(*catch_type)
+                self.platform_state = 1
+            elif mail['positions_z'] == 2 and self.platform_state == 1: # 下层抓到上层
                 catch_type = [0, 1, 0, 0]
                 response = self.grasp_proxy(*catch_type)
+                self.platform_state = 2
             else:
                 rospy.logwarn("邮件位置不正确")
                 return False
@@ -243,14 +254,21 @@ class MainController:
             return False
         
     def deliver_mails(self, mails): # 运送邮件
+        mails.reverse()
         try:
             for mail in mails:
                 for box in self.mail_box:
                     if box['result'] == mail['results']:
                         self.navigate_posekey(box['box_id'])
                         break
-                throw_type = [0, 0]
-                response = self.throw_proxy(*throw_type)
+                if self.platform_state == 2: # 上层
+                    throw_type = [1, 0]
+                    response = self.throw_proxy(*throw_type)
+                    self.platform_state = 1
+                elif self.platform_state == 1: # 下层
+                    throw_type = [0, 0]
+                    response = self.throw_proxy(*throw_type)
+                    self.platform_state = 0
                 if not response.success:
                     rospy.logwarn("运送邮件失败")
                     return False
@@ -259,9 +277,10 @@ class MainController:
             rospy.logerr("运送服务调用失败: {e}")
             return False
         
-    def select_nearest_province(self): # 对mail_table按照priority_provinces重新排序
-        priority_mails = [mail for mail in self.mail_table if mail['results'] in self.priority_provinces]
-        other_mails = [mail for mail in self.mail_table if mail['results'] not in self.priority_provinces]
+    def select_nearest_province(self):  # 对mail_table按照priority_provinces重新排序
+        flattened_mails = self.mail_table
+        priority_mails = [mail for mail in flattened_mails if mail['results'] in self.priority_provinces]
+        other_mails = [mail for mail in flattened_mails if mail['results'] not in self.priority_provinces]
         sorted_mail_table = priority_mails + other_mails
         return sorted_mail_table
     
@@ -309,13 +328,18 @@ class MainController:
 
         self.calibratePose("start") # 校准起始位姿
 
+        self.mail_box.append({'box_id': "U",'result': 0}) # 无效箱子
+        self.priority_provinces.append(0) # 无效箱子优先
+
         self.takeboxPic_RU() # 邮箱拍照[右上]
         self.takeboxPic_RD() # 邮箱拍照[右下]
         self.takeshelfPic_R() # 货架拍照[右侧]
         self.mail_table = self.select_nearest_province() # 对mail_table按照priority_provinces重新排序
+        print("开始处理右侧优先省份邮件...")
         self.process_priority_mails() # 处理右侧优先省份邮件
 
         self.priority_provinces = [] # 清空优先省份
+        self.priority_provinces.append(0) # 无效箱子优先
         self.mail_table_temp = self.mail_table # 备份邮件列表
         self.mail_table = [] # 清空邮件列表
 
@@ -323,14 +347,16 @@ class MainController:
         self.takeboxPic_LU() # 邮箱拍照[左上]
         self.takeshelfPic_L() # 货架拍照[左侧]
         self.mail_table = self.select_nearest_province() # 对mail_table按照priority_provinces重新排序
+        print("开始处理左侧优先省份邮件...")
         self.process_priority_mails() # 处理左侧优先省份邮件
 
         self.mail_table = self.mail_table_temp + self.mail_table # 合并邮件列表
         
+        print("开始处理非优先省份邮件...")
         self.process_non_priority_mails() # 处理非优先省份邮件
 
         self.end() # 结束界面
-
+        
 if __name__ == "__main__":
     position_path = "/home/eaibot/nju_ws/src/motion_control/config/position.txt"
     controller = MainController(position_path)
