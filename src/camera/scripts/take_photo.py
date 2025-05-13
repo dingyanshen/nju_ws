@@ -99,13 +99,33 @@ class PhotoServiceNode:
         socket.send_string(response_qrcode_points_4)
         response_4 = socket.recv()
         if(response_1 != response_qrcode_barcodes_1):
-            response_1 = 0
+            if response_1 == 0 and response_qrcode_barcodes_1 != 0:
+                response_1 = response_qrcode_barcodes_1
+            elif response_1 != 0 and response_qrcode_barcodes_1 == 0:
+                response_1 = response_1
+            else:
+                response_1 = 0
         if(response_2 != response_qrcode_barcodes_2):
-            response_2 = 0
+            if response_2 == 0 and response_qrcode_barcodes_2 != 0:
+                response_2 = response_qrcode_barcodes_2
+            elif response_2 != 0 and response_qrcode_barcodes_2 == 0:
+                response_2 = response_2
+            else:
+                response_2 = 0
         if(response_3 != response_qrcode_barcodes_3):
-            response_3 = 0
+            if response_3 == 0 and response_qrcode_barcodes_3 != 0:
+                response_3 = response_qrcode_barcodes_3
+            elif response_3 != 0 and response_qrcode_barcodes_3 == 0:
+                response_3 = response_3
+            else:
+                response_3 = 0
         if(response_4 != response_qrcode_barcodes_4):
-            response_4 = 0
+            if response_4 == 0 and response_qrcode_barcodes_4 != 0:
+                response_4 = response_qrcode_barcodes_4
+            elif response_4 != 0 and response_qrcode_barcodes_4 == 0:
+                response_4 = response_4
+            else:
+                response_4 = 0
         num_province = ['无效', '江苏', '浙江', '安徽', '河南', '湖南', '四川', '广东', '福建']
         print(num_province[int(response_1)])
         print(num_province[int(response_2)])
