@@ -109,7 +109,7 @@ if __name__ == "__main__":
     controller.calibratePose("start")
 
     while True:
-        choice = raw_input("请输入选择 s拍货架 b拍邮箱 c抓取 t投递 n导航 p校准位姿 q退出：")
+        choice = raw_input("请输入选择 s拍货架 b拍邮箱 c抓取 t投递 n导航 p校准位姿 l加载位置 q退出：")
         if choice == "s":
             type = input("请输入类型（1-6）：")
             if type != 1 and type != 2 and type != 3 and type != 4 and type != 5 and type != 6:
@@ -142,5 +142,7 @@ if __name__ == "__main__":
                 print("输入错误，请重新输入")
                 continue
             controller.calibratePose(poseKey)
+        elif choice == "l":
+            controller.position = controller.loadToDict(position_path, mode="pose")
         elif choice == "q":
             break
